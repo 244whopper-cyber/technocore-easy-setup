@@ -10,6 +10,7 @@ python -m venv .build-venv
   --clean `
   --windowed `
   --name "Technocore Easy Setup" `
+  --add-data "technocore_easy_setup/assets/technocore-background.png;technocore_easy_setup/assets" `
   app.py
 
 Write-Host "Built: dist\Technocore Easy Setup\Technocore Easy Setup.exe"

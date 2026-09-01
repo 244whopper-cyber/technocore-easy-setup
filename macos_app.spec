@@ -4,7 +4,12 @@ a = Analysis(
     ["app.py"],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[
+        (
+            "technocore_easy_setup/assets/technocore-background.png",
+            "technocore_easy_setup/assets",
+        ),
+    ],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

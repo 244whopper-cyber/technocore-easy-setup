@@ -17,6 +17,9 @@ technocore-easy-setup = "technocore_easy_setup.gui:main"
 [tool.setuptools.packages.find]
 include = ["technocore_easy_setup*"]
 
+[tool.setuptools.package-data]
+technocore_easy_setup = ["assets/*.png"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"

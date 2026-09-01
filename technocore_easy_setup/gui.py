@@ -38,6 +38,8 @@ GREEN = "#0c6b4f"
 GREEN_DARK = "#084c39"
 LINE = "#d8d5ca"
 BLUE = "#315b78"
+PANEL = "#fbfaf5"
+BACKGROUND_IMAGE = Path(__file__).with_name("assets") / "technocore-background.png"
 
 
 def primary_button(
@@ -147,6 +149,10 @@ class EasySetupApp(tk.Tk):
         self.minsize(820, 650)
         self.configure(bg=BG)
         self.option_add("*Font", ("TkDefaultFont", 10))
+        try:
+            self.background_photo: tk.PhotoImage | None = tk.PhotoImage(file=str(BACKGROUND_IMAGE))
+        except tk.TclError:
+            self.background_photo = None
         self._build()
 
     def t(self, key: str) -> str:
@@ -157,15 +163,27 @@ class EasySetupApp(tk.Tk):
             child.destroy()
         outer = tk.Frame(self, bg=BG, padx=34, pady=26)
         outer.pack(fill="both", expand=True)
-        header = tk.Frame(outer, bg=BG)
+        if self.background_photo is not None:
+            backdrop = tk.Label(outer, image=self.background_photo, borderwidth=0)
+            backdrop.place(relx=0.5, rely=0.5, anchor="center")
+            backdrop.lower()
+
+        header = tk.Frame(
+            outer,
+            bg=PANEL,
+            padx=18,
+            pady=14,
+            highlightbackground="#d8e4de",
+            highlightthickness=1,
+        )
         header.pack(fill="x")
-        title_box = tk.Frame(header, bg=BG)
+        title_box = tk.Frame(header, bg=PANEL)
         title_box.pack(side="left", fill="x", expand=True)
-        tk.Label(title_box, text=self.t("app_title"), bg=BG, fg=INK, font=("TkDefaultFont", 24, "bold"), anchor="w").pack(fill="x")
-        tk.Label(title_box, text=self.t("subtitle"), bg=BG, fg=MUTED, font=("TkDefaultFont", 11), anchor="w").pack(fill="x", pady=(4, 0))
-        lang_box = tk.Frame(header, bg=BG)
+        tk.Label(title_box, text=self.t("app_title"), bg=PANEL, fg=INK, font=("TkDefaultFont", 24, "bold"), anchor="w").pack(fill="x")
+        tk.Label(title_box, text=self.t("subtitle"), bg=PANEL, fg=MUTED, font=("TkDefaultFont", 11), anchor="w").pack(fill="x", pady=(4, 0))
+        lang_box = tk.Frame(header, bg=PANEL)
         lang_box.pack(side="right")
-        tk.Label(lang_box, text=self.t("language"), bg=BG, fg=MUTED).pack(anchor="e")
+        tk.Label(lang_box, text=self.t("language"), bg=PANEL, fg=MUTED).pack(anchor="e")
         selector = ttk.Combobox(lang_box, values=["日本語", "English"], state="readonly", width=12)
         selector.set("日本語" if self.language == "ja" else "English")
         selector.pack(pady=(4, 0))
@@ -192,7 +210,12 @@ class EasySetupApp(tk.Tk):
                 pady=7,
             ).pack(side="right")
 
-        canvas = tk.Canvas(outer, bg=BG, highlightthickness=0)
+        canvas = tk.Canvas(
+            outer,
+            bg=BG,
+            highlightbackground="#d8e4de",
+            highlightthickness=1,
+        )
         scrollbar = ttk.Scrollbar(outer, orient="vertical", command=canvas.yview)
         body = tk.Frame(canvas, bg=BG)
         body.bind("<Configure>", lambda _e: canvas.configure(scrollregion=canvas.bbox("all")))
