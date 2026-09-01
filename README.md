@@ -44,6 +44,15 @@ Preview packages for macOS Apple silicon, macOS Intel, and Windows x64 are publi
 
 The preview packages are not yet Apple Developer ID/notarization or Windows Authenticode signed. Read `README-FIRST.txt` inside the ZIP and verify the accompanying SHA-256 checksum. Do not disable operating-system security globally. The source-based method below remains the recommended option until signed packages are available.
 
+If macOS displays **“TechnocoreEasySetup Not Opened”**, only continue after confirming that the ZIP came from this repository's Releases page and its SHA-256 matches the accompanying `.sha256` file:
+
+1. Click **Done** in the warning.
+2. Open **System Settings → Privacy & Security**.
+3. Scroll to Security and click **Open Anyway** for `TechnocoreEasySetup`.
+4. Authenticate with your Mac login and click **Open** in the final prompt.
+
+This creates an exception for this app only. Never disable Gatekeeper or macOS security globally. See [Apple's official guidance](https://support.apple.com/102445).
+
 ## Run from source
 
 This MVP uses the same Python 3.12 baseline and `cryptography` versions as `technocore-did-starter` v1.0.0.

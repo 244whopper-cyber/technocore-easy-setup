@@ -43,6 +43,15 @@ MVPでは次の6機能を利用できます。
 
 現在の試用版は、Apple Developer ID署名・公証およびWindows Authenticode署名が未実施です。ZIP内の `README-FIRST.txt` を読み、同時に配布されるSHA-256チェックサムを確認してください。OSのセキュリティ機能を全体的に無効化してはいけません。正式な署名済みパッケージが用意されるまでは、下記のソースからの起動を推奨します。
 
+macOSで **「TechnocoreEasySetup Not Opened」** と表示された場合は、ZIPをこのリポジトリのReleasesページから入手し、SHA-256が同梱の `.sha256` ファイルと一致することを確認してから、次の手順を実行してください。
+
+1. 警告画面で **Done** を押します。
+2. **システム設定 → プライバシーとセキュリティ** を開きます。
+3. セキュリティ欄までスクロールし、`TechnocoreEasySetup` の **このまま開く（Open Anyway）** を押します。
+4. Macのログイン情報で認証し、最後の確認画面で **開く** を押します。
+
+この操作は、このアプリだけを例外として登録します。GatekeeperやmacOS全体のセキュリティ機能を無効化してはいけません。[Apple公式手順](https://support.apple.com/102445) も確認してください。
+
 ## ソースから起動する
 
 このMVPは、既存の `technocore-did-starter` v1.0.0と同じPython 3.12および `cryptography` の組み合わせを基準にしています。
