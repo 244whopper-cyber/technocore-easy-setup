@@ -40,6 +40,43 @@ LINE = "#d8d5ca"
 BLUE = "#315b78"
 
 
+def primary_button(
+    parent: tk.Misc,
+    *,
+    label: str,
+    command: Callable[[], None],
+    padx: int = 18,
+    pady: int = 8,
+) -> tk.Button:
+    """Create a primary button that remains readable with macOS Aqua Tk.
+
+    Aqua can ignore a ``tk.Button`` background while still applying its white
+    foreground, which makes the label look disabled on a white button.  Use a
+    dark label and a green focus outline on Aqua; retain the filled green style
+    on Windows and other Tk platforms.
+    """
+
+    aqua = parent.tk.call("tk", "windowingsystem") == "aqua"
+    return tk.Button(
+        parent,
+        text=label,
+        command=command,
+        padx=padx,
+        pady=pady,
+        bg=GREEN,
+        fg=GREEN_DARK if aqua else "white",
+        activebackground="#d4e7df" if aqua else GREEN_DARK,
+        activeforeground=GREEN_DARK if aqua else "white",
+        highlightbackground=GREEN,
+        highlightcolor=GREEN_DARK,
+        highlightthickness=2,
+        borderwidth=1 if aqua else 0,
+        relief="raised" if aqua else "flat",
+        font=("TkDefaultFont", 10, "bold"),
+        cursor="hand2",
+    )
+
+
 class FieldDialog(tk.Toplevel):
     """Small reusable modal form that returns string values."""
 
@@ -77,7 +114,7 @@ class FieldDialog(tk.Toplevel):
         buttons = tk.Frame(frame, bg=BG)
         buttons.pack(fill="x", pady=(20, 0))
         tk.Button(buttons, text=cancel_label, command=self.destroy, padx=18, pady=8, relief="flat", bg="#e5e2d8", fg=INK).pack(side="right")
-        tk.Button(buttons, text=submit_label, command=self._submit, padx=18, pady=8, relief="flat", bg=GREEN, fg="white", activebackground=GREEN_DARK).pack(side="right", padx=(0, 8))
+        primary_button(buttons, label=submit_label, command=self._submit).pack(side="right", padx=(0, 8))
         self.bind("<Escape>", lambda _event: self.destroy())
         self.protocol("WM_DELETE_WINDOW", self.destroy)
         self.update_idletasks()
@@ -180,7 +217,7 @@ class EasySetupApp(tk.Tk):
             card.grid(row=row, column=col, sticky="nsew", padx=(0 if col == 0 else 8, 8 if col == 0 else 0), pady=8)
             tk.Label(card, text=self.t(label_key), bg=CARD, fg=INK, font=("TkDefaultFont", 13, "bold"), anchor="w").pack(fill="x")
             tk.Label(card, text=self.t(desc_key), bg=CARD, fg=MUTED, justify="left", wraplength=360, anchor="nw").pack(fill="both", expand=True, pady=(7, 13))
-            button = tk.Button(card, text=self.t("continue"), command=command, bg=GREEN, fg="white", activebackground=GREEN_DARK, activeforeground="white", relief="flat", padx=16, pady=7, cursor="hand2")
+            button = primary_button(card, label=self.t("continue"), command=command, padx=16, pady=7)
             button.pack(anchor="e")
 
         footer = tk.Frame(body, bg=BG)

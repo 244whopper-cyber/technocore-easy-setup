@@ -27,7 +27,7 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import (
     Ed25519PublicKey,
 )
 
-APP_VERSION = "0.1.0"
+APP_VERSION = "0.1.1"
 DEFAULT_BASE_URL = "https://technocore.chat"
 DEFAULT_TIMEOUT_SECONDS = 20.0
 MAX_MESSAGE_CHARS = 4096

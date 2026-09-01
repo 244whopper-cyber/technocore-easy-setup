@@ -1,4 +1,4 @@
-Technocore Easy Setup v0.1.0 (macOS arm64)
+Technocore Easy Setup v0.1.1 (macOS arm64)
 
 日本語:
 1. TechnocoreEasySetup.app をダブルクリックします。
