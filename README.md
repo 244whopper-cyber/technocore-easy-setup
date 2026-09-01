@@ -37,6 +37,13 @@ Back up the encrypted `identity.pem` and its passphrase separately. Never publis
 
 See [SECURITY.md](SECURITY.md) for the full boundary and recovery notes.
 
+## Desktop downloads
+
+Preview packages for macOS Apple silicon, macOS Intel, and Windows x64 are published on the
+[Releases page](https://github.com/244whopper-cyber/technocore-easy-setup/releases). They include Python and Tk, so users do not need to install Python separately.
+
+The preview packages are not yet Apple Developer ID/notarization or Windows Authenticode signed. Read `README-FIRST.txt` inside the ZIP and verify the accompanying SHA-256 checksum. Do not disable operating-system security globally. The source-based method below remains the recommended option until signed packages are available.
+
 ## Run from source
 
 This MVP uses the same Python 3.12 baseline and `cryptography` versions as `technocore-did-starter` v1.0.0.

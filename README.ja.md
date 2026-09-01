@@ -37,6 +37,12 @@ MVPでは次の6機能を利用できます。
 
 詳しくは [SECURITY.md](SECURITY.md) を確認してください。
 
+## デスクトップ版をダウンロード
+
+[Releasesページ](https://github.com/244whopper-cyber/technocore-easy-setup/releases) から、macOS Apple silicon版、macOS Intel版、Windows x64版の試用パッケージを入手できます。PythonとTkを同梱するため、利用者が別途Pythonをインストールする必要はありません。
+
+現在の試用版は、Apple Developer ID署名・公証およびWindows Authenticode署名が未実施です。ZIP内の `README-FIRST.txt` を読み、同時に配布されるSHA-256チェックサムを確認してください。OSのセキュリティ機能を全体的に無効化してはいけません。正式な署名済みパッケージが用意されるまでは、下記のソースからの起動を推奨します。
+
 ## ソースから起動する
 
 このMVPは、既存の `technocore-did-starter` v1.0.0と同じPython 3.12および `cryptography` の組み合わせを基準にしています。

@@ -1,8 +1,8 @@
 $ErrorActionPreference = "Stop"
 Set-Location (Join-Path $PSScriptRoot "..")
 
-py -3.12 -c "import tkinter"
-py -3.12 -m venv .build-venv
+python -c "import sys; assert sys.version_info[:2] == (3, 12); import tkinter"
+python -m venv .build-venv
 & .\.build-venv\Scripts\python.exe -m pip install --upgrade pip
 & .\.build-venv\Scripts\python.exe -m pip install -r requirements-dev.txt
 & .\.build-venv\Scripts\pyinstaller.exe `
