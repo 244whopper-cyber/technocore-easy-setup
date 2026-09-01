@@ -52,8 +52,8 @@ def primary_button(
 
     Aqua can ignore a ``tk.Button`` background while still applying its white
     foreground, which makes the label look disabled on a white button.  Use a
-    dark label and a green focus outline on Aqua; retain the filled green style
-    on Windows and other Tk platforms.
+    dark label with a subtle neutral edge on Aqua; retain the filled green
+    style on Windows and other Tk platforms.
     """
 
     aqua = parent.tk.call("tk", "windowingsystem") == "aqua"
@@ -67,11 +67,11 @@ def primary_button(
         fg=GREEN_DARK if aqua else "white",
         activebackground="#d4e7df" if aqua else GREEN_DARK,
         activeforeground=GREEN_DARK if aqua else "white",
-        highlightbackground=GREEN,
-        highlightcolor=GREEN_DARK,
-        highlightthickness=2,
-        borderwidth=1 if aqua else 0,
-        relief="raised" if aqua else "flat",
+        highlightbackground="#aab7b1" if aqua else GREEN,
+        highlightcolor="#87978f" if aqua else GREEN_DARK,
+        highlightthickness=1 if aqua else 0,
+        borderwidth=0,
+        relief="flat",
         font=("TkDefaultFont", 10, "bold"),
         cursor="hand2",
     )
