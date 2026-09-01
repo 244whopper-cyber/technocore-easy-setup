@@ -145,8 +145,8 @@ class EasySetupApp(tk.Tk):
         self.language = "ja"
         self.busy = False
         self.title("Technocore Easy Setup")
-        self.geometry("940x730")
-        self.minsize(820, 650)
+        self.geometry("1080x730")
+        self.minsize(920, 650)
         self.configure(bg=BG)
         self.option_add("*Font", ("TkDefaultFont", 10))
         try:
@@ -168,8 +168,12 @@ class EasySetupApp(tk.Tk):
             backdrop.place(relx=0.5, rely=0.5, anchor="center")
             backdrop.lower()
 
+        content = tk.Frame(outer, bg=BG, width=770)
+        content.pack(side="left", fill="y")
+        content.pack_propagate(False)
+
         header = tk.Frame(
-            outer,
+            content,
             bg=PANEL,
             padx=18,
             pady=14,
@@ -189,7 +193,7 @@ class EasySetupApp(tk.Tk):
         selector.pack(pady=(4, 0))
         selector.bind("<<ComboboxSelected>>", lambda _e: self._set_language(selector.get()))
 
-        status = tk.Frame(outer, bg="#e4f2ec", padx=18, pady=13, highlightbackground="#bcd9cd", highlightthickness=1)
+        status = tk.Frame(content, bg="#e4f2ec", padx=18, pady=13, highlightbackground="#bcd9cd", highlightthickness=1)
         status.pack(fill="x", pady=(20, 18))
         ready = self.key_path.exists()
         tk.Label(status, text="●", bg="#e4f2ec", fg=GREEN if ready else "#a56a12", font=("TkDefaultFont", 13)).pack(side="left")
@@ -211,12 +215,12 @@ class EasySetupApp(tk.Tk):
             ).pack(side="right")
 
         canvas = tk.Canvas(
-            outer,
+            content,
             bg=BG,
             highlightbackground="#d8e4de",
             highlightthickness=1,
         )
-        scrollbar = ttk.Scrollbar(outer, orient="vertical", command=canvas.yview)
+        scrollbar = ttk.Scrollbar(content, orient="vertical", command=canvas.yview)
         body = tk.Frame(canvas, bg=BG)
         body.bind("<Configure>", lambda _e: canvas.configure(scrollregion=canvas.bbox("all")))
         window = canvas.create_window((0, 0), window=body, anchor="nw")
@@ -239,7 +243,7 @@ class EasySetupApp(tk.Tk):
             card = tk.Frame(body, bg=CARD, padx=20, pady=17, highlightbackground=LINE, highlightthickness=1)
             card.grid(row=row, column=col, sticky="nsew", padx=(0 if col == 0 else 8, 8 if col == 0 else 0), pady=8)
             tk.Label(card, text=self.t(label_key), bg=CARD, fg=INK, font=("TkDefaultFont", 13, "bold"), anchor="w").pack(fill="x")
-            tk.Label(card, text=self.t(desc_key), bg=CARD, fg=MUTED, justify="left", wraplength=360, anchor="nw").pack(fill="both", expand=True, pady=(7, 13))
+            tk.Label(card, text=self.t(desc_key), bg=CARD, fg=MUTED, justify="left", wraplength=300, anchor="nw").pack(fill="both", expand=True, pady=(7, 13))
             button = primary_button(card, label=self.t("continue"), command=command, padx=16, pady=7)
             button.pack(anchor="e")
 
