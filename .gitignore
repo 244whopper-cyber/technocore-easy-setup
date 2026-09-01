@@ -1,0 +1,14 @@
+.venv/
+.build-venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+build/
+dist/
+*.spec
+!macos_app.spec
+.pyinstaller-config/
+identity.pem
+*.pem
+*.key

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "technocore-easy-setup"
+version = "0.1.0"
+description = "A bilingual desktop GUI for safe Technocore onboarding"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { text = "MIT" }
+dependencies = ["cryptography>=48,<51"]
+
+[project.gui-scripts]
+technocore-easy-setup = "technocore_easy_setup.gui:main"
+
+[tool.setuptools.packages.find]
+include = ["technocore_easy_setup*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
